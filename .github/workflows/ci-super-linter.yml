@@ -4,9 +4,9 @@ name: Lint
 on:
   push:
     branches:
-      - '*'
+      - "*"
     tags:
-      - '*'
+      - "*"
   pull_request:
     branches:
       - main
@@ -19,7 +19,6 @@ jobs:
     name: Lint Code Base
     runs-on: ubuntu-latest
     steps:
-
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -27,10 +26,12 @@ jobs:
           fetch-depth: 0
 
       - name: Lint Code Base
-        uses: github/super-linter/slim@v6
+        uses: super-linter/super-linter/slim@v8
         env:
           VALIDATE_ALL_CODEBASE: false
+          VALIDATE_BIOME_FORMAT: false
           VALIDATE_CLANG_FORMAT: false
+          VALIDATE_GITHUB_ACTIONS_ZIZMOR: false
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           IGNORE_GENERATED_FILES: true
