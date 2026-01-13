@@ -18,6 +18,7 @@
 #include <sys/stat.h>
 #include <sys/statvfs.h>
 #include <sys/timerfd.h>
+#include <sys/xattr.h>
 #include <unistd.h>
 #if !defined(__GLIBC__)
 #include <limits.h>
@@ -264,4 +265,73 @@ int pthread_sigqueue(pthread_t thread, int sig, const union sigval value) {
 uint32_t li_pthread_sigqueue(pthread_t p, int sig, int word) {
   union sigval u = {.sival_int = word};
   return pthread_sigqueue(p, sig, u);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// xattr
+////////////////////////////////////////////////////////////////////////////////
+
+ssize_t li_listxattr(const char *path, char *list, size_t bytes) {
+  int res = listxattr(path, list, bytes);
+  CHECKRES
+}
+
+ssize_t li_llistxattr(const char *path, char *list, size_t bytes) {
+  int res = llistxattr(path, list, bytes);
+  CHECKRES
+}
+
+ssize_t li_flistxattr(int fd, char *list, size_t bytes) {
+  int res = flistxattr(fd, list, bytes);
+  CHECKRES
+}
+
+ssize_t li_getxattr(const char *path, const char *name,
+                    char *value, size_t bytes) {
+  int res = getxattr(path, name, value, bytes);
+  CHECKRES
+}
+
+ssize_t li_lgetxattr(const char *path, const char *name,
+                    char *value, size_t bytes) {
+  int res = lgetxattr(path, name, value, bytes);
+  CHECKRES
+}
+
+ssize_t li_fgetxattr(int fd, const char *name, char *value, size_t bytes) {
+  int res = fgetxattr(fd, name, value, bytes);
+  CHECKRES
+}
+
+int li_setxattr(const char *path, const char *name, char *value,
+                size_t off, size_t bytes, int flags) {
+  int res = setxattr(path, name, value + off, bytes, flags);
+  CHECKRES
+}
+
+int li_lsetxattr(const char *path, const char *name, char *value,
+                size_t off, size_t bytes, int flags) {
+  int res = lsetxattr(path, name, value + off, bytes, flags);
+  CHECKRES
+}
+
+int li_fsetxattr(int fd, const char *name, char *value,
+                size_t off, size_t bytes, int flags) {
+  int res = fsetxattr(fd, name, value + off, bytes, flags);
+  CHECKRES
+}
+
+int li_removexattr(const char *path, const char *name) {
+  int res = removexattr(path, name);
+  CHECKRES
+}
+
+int li_lremovexattr(const char *path, const char *name) {
+  int res = lremovexattr(path, name);
+  CHECKRES
+}
+
+int li_fremovexattr(int fd, const char *name) {
+  int res = fremovexattr(fd, name);
+  CHECKRES
 }
