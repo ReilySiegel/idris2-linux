@@ -6,7 +6,11 @@ brief   = "System utilities for using Idris2 on GNU/Linux"
 depends = base >= 0.7.0
         , posix
 
-modules = System.Linux.Epoll
+modules = System.Linux.Attr
+        , System.Linux.Attr.Flags
+        , System.Linux.Attr.Prim
+
+        , System.Linux.Epoll
         , System.Linux.Epoll.Flags
         , System.Linux.Epoll.Prim
         , System.Linux.Epoll.Struct
