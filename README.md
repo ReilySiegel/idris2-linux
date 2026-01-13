@@ -151,8 +151,10 @@ The following will probably not be implemented:
 
 ### Chapter 16
 
-Extended attributes are non-standard and will not be supported
-for the time being.
+- [x] implement `listxattr`, `llistxattr`, and `flistxattr`
+- [x] implement `getxattr`, `lgetxattr`, and `fgetxattr`
+- [x] implement `setxattr`, `lsetxattr`, and `fsetxattr`
+- [x] implement `removexattr`, `lremovexattr`, and `fremovexattr`
 
 ### Chapter 17
 
