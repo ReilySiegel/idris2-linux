@@ -49,9 +49,9 @@ really matters, try to allocate once and reuse the allocated pointer.
 
 The following will probably not be implemented:
 
-* scatter and gather versions of `read` and `write`
-* `tmpfile` as it operates on `FILE *`
-* `dup3` as it is not part of POSIX
+- scatter and gather versions of `read` and `write`
+- `tmpfile` as it operates on `FILE *`
+- `dup3` as it is not part of POSIX
 
 ### Chapter 6
 
@@ -59,8 +59,8 @@ The following will probably not be implemented:
 
 The following will probably not be implemented:
 
-* `setjmp` and `longjmp` as they belong strictly to C land
-* exercises, as they deal either with non-implementable stuff or with the
+- `setjmp` and `longjmp` as they belong strictly to C land
+- exercises, as they deal either with non-implementable stuff or with the
   environment, and we already have that from base
 
 ### Chapter 7
@@ -69,8 +69,8 @@ The following will probably not be implemented:
 
 The following will probably not be implemented:
 
-* `alloca` because it is mostly useful in C land
-* `memalign` and `posix_memalign` because they are non-standard
+- `alloca` because it is mostly useful in C land
+- `memalign` and `posix_memalign` because they are non-standard
 
 ### Chapter 8
 
@@ -78,7 +78,7 @@ Note: Calls to `crypt` are available from [idris2-crypt](https://github.com/stef
 
 The following will probably not be implemented:
 
-* `getpwnam`, `getpwuid`, `getgrnam`, `getgruid`, `getpwent`, `setpwent`
+- `getpwnam`, `getpwuid`, `getgrnam`, `getgruid`, `getpwent`, `setpwent`
   `endpwent`, `getspnam`, `getspent`, `setspent`, `endspent`: All of these
   can be implemented by reading or streaming the corresponding files in `/etc`
   into proper Idris records.
@@ -94,7 +94,7 @@ The following will probably not be implemented:
 
 The following will probably not be implemented:
 
-* `getresuid`, `getresgid`, `setfsuid`, and `setfsgid` (all are non-standard)
+- `getresuid`, `getresgid`, `setfsuid`, and `setfsgid` (all are non-standard)
 
 ### Chapter 10
 
@@ -105,7 +105,7 @@ The following will probably not be implemented:
 
 The following will probably not be implemented:
 
-* `settimeofday` and `adjtime` because these are typically handled by
+- `settimeofday` and `adjtime` because these are typically handled by
   a system daemon
 
 Note: Different types of clocks are implemented in `System.Clock` in base.
@@ -146,8 +146,8 @@ file I/O is available from `System.File` in base.
 
 The following will probably not be implemented:
 
-* `access` as its use is discouraged
-* setting of i-node flags as these are non-standard
+- `access` as its use is discouraged
+- setting of i-node flags as these are non-standard
 
 ### Chapter 16
 
@@ -178,9 +178,9 @@ for the time being.
 
 The following will probably not be implemented:
 
-* `nfwt`: We should probably write our tree-walking routines in
+- `nfwt`: We should probably write our tree-walking routines in
   Idris proper instead of messing around with C callbacks.
-* `realpath` because it's even more broken than `getcwd`
+- `realpath` because it's even more broken than `getcwd`
 
 ### Chapter 19
 
@@ -208,7 +208,7 @@ file descriptor (under Linux) or synchronous signal handling. See chapter 22.
 
 The following will probably not be implemented:
 
-* `sigsetjmp` `siglongjmp`, and `sigaltstack` as I can't see their use on
+- `sigsetjmp` `siglongjmp`, and `sigaltstack` as I can't see their use on
   the default backends.
 
 ### Chapter 22
@@ -238,7 +238,7 @@ The following will probably not be implemented:
 
 The following will probably not be implemented:
 
-* Installing exit handlers via `atexit` and `onexit`, as these might suffer
+- Installing exit handlers via `atexit` and `onexit`, as these might suffer
   from the same limitations as other callbacks when used from Schemes.
 
 ### Chapter 26
@@ -250,7 +250,7 @@ The following will probably not be implemented:
 
 The following will probably not be implemented:
 
-* `wait3` and `wait4` as they are (according to the book) not often used
+- `wait3` and `wait4` as they are (according to the book) not often used
   and lack standardization.
 
 ### Chapter 27
@@ -263,7 +263,7 @@ The following will probably not be implemented:
 
 The following will probably not be implemented:
 
-* `clone` as it takes a callback function and is probably not very
+- `clone` as it takes a callback function and is probably not very
   useful in this generality when using Idris.
 
 ### Chapter 29
@@ -273,7 +273,7 @@ The following will probably not be implemented:
 
 The following will probably not be implemented:
 
-* `pthread_create`, `pthread_exit`, `pthread_detach`, and thread attributes
+- `pthread_create`, `pthread_exit`, `pthread_detach`, and thread attributes
   as the lifetime of threads is controlled by the Scheme runtime.
 
 ### Chapter 30
@@ -283,17 +283,17 @@ The following will probably not be implemented:
 
 The following will probably not be implemented:
 
-* Fine grained details about mutex and condition attributes.
+- Fine grained details about mutex and condition attributes.
 
 ### Chapter 31
 
 The following will probably not be implemented:
 
-* `pthread_once` as it involves callbacks and is not clear how it
+- `pthread_once` as it involves callbacks and is not clear how it
   interacts with Scheme's thread management.
-* thread specific data, because we have other mechanisms in Idris to
+- thread specific data, because we have other mechanisms in Idris to
   achieve this
-* thread-local storage, because this makes use of a C language keyword.
+- thread-local storage, because this makes use of a C language keyword.
 
 ### Chapter 32
 
@@ -303,7 +303,7 @@ The following will probably not be implemented:
 
 The following will probably not be implemented:
 
-* registering and handling of thread cleanup handlers. I might come back
+- registering and handling of thread cleanup handlers. I might come back
   to this and check interop with the Scheme backends
 
 ### Chapter 33
