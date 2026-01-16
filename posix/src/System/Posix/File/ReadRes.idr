@@ -161,6 +161,42 @@ FromBuf String where
     let (n ** ib) # t := fromBuf {a = EBuffer} buf t
      in toString ib 0 n # t
 
+export %inline
+[DecimalString] FromBuf (Maybe Nat) where
+  fromBuf b t =
+    let bs # t := fromBuf {a=ByteString} b t
+    in (parseDecimalNat bs) # t
+
+export %inline
+[HexadecimalString] FromBuf (Maybe Nat) where
+  fromBuf b t =
+    let bs # t := fromBuf {a=ByteString} b t
+    in (parseHexadecimalNat bs) # t
+
+export %inline
+[OctalString] FromBuf (Maybe Nat) where
+  fromBuf b t =
+    let bs # t := fromBuf {a=ByteString} b t
+    in (parseOctalNat bs) # t
+
+export %inline
+[BinaryString] FromBuf (Maybe Nat) where
+  fromBuf b t =
+    let bs # t := fromBuf {a=ByteString} b t
+    in (parseBinaryNat bs) # t
+
+export %inline
+[IntegerString] FromBuf (Maybe Integer) where
+  fromBuf b t =
+    let bs # t := fromBuf {a=ByteString} b t
+    in (parseInteger bs) # t
+
+export %inline
+[DoubleString] FromBuf (Maybe Double) where
+  fromBuf b t =
+    let bs # t := fromBuf {a=ByteString} b t
+    in (parseDouble bs) # t
+
 public export
 0 ECArrayIO : Type -> Type
 ECArrayIO t = (n ** CArrayIO n t)
