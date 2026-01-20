@@ -19,7 +19,9 @@
 #include <sys/statvfs.h>
 #include <sys/timerfd.h>
 #include <unistd.h>
-#if !defined(__GLIBC__)
+#if !defined(__GLIBC__) ||                      \
+  (__GLIBC__ < 2) ||                            \
+  (__GLIBC__ == 2 && __GLIBC_MINOR__ < 35)
 #include <limits.h>
 #endif
 
@@ -88,7 +90,9 @@ int li_epoll_wait(int epfd, struct epoll_event *evlist, int max, int timeout) {
   CHECKRES
 }
 
-#if !defined(__GLIBC__)
+#if !defined(__GLIBC__) ||                      \
+  (__GLIBC__ < 2) ||                            \
+  (__GLIBC__ == 2 && __GLIBC_MINOR__ < 35)
 // Implementation in terms of epoll_pwait for Musl libc
 int epoll_pwait2(int epfd, struct epoll_event *events, int maxevents,
                  const struct timespec *timeout, const sigset_t *sigmask) {
