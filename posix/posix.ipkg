@@ -54,6 +54,11 @@ modules = System.Posix.Dir
         , System.Posix.Socket.Struct
         , System.Posix.Socket.Types
 
+        , System.Posix.Spawn
+        , System.Posix.Spawn.Prim
+        , System.Posix.Spawn.Struct
+        , System.Posix.Spawn.Types
+
         , System.Posix.Time
         , System.Posix.Time.Types
 
