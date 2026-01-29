@@ -8,6 +8,7 @@
 #include <poll.h>
 #include <pthread.h>
 #include <signal.h>
+#include <spawn.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -339,6 +340,36 @@ uint32_t li_wstopsig(int status) { return WSTOPSIG(status); }
 
 uint8_t li_wifcontinued(int status) { return WIFCONTINUED(status); }
 
+int li_posix_spawn(const char *pth,
+                   const posix_spawn_file_actions_t *file_actions,
+                   const posix_spawnattr_t *attr, char *const args[],
+                   char *const env[]) {
+  pid_t pid;
+
+  int res = posix_spawn(&pid, pth, file_actions, attr, args, env);
+
+  if (res == 0) {
+    return pid;
+  } else {
+    return -res;
+  }
+}
+
+int li_posix_spawnp(const char *pth,
+                    const posix_spawn_file_actions_t *file_actions,
+                    const posix_spawnattr_t *attr, char *const args[],
+                    char *const env[]) {
+  pid_t pid;
+
+  int res = posix_spawnp(&pid, pth, file_actions, attr, args, env);
+
+  if (res == 0) {
+    return pid;
+  } else {
+    return -res;
+  }
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // Pthreads
 ////////////////////////////////////////////////////////////////////////////////
@@ -411,7 +442,7 @@ sigset_t *li_pthread_siggetmask() { return li_pthread_sigmask(0, NULL); }
 int li_kill(pid_t p, int sig) {
   int res = kill(p, sig);
   CHECKRES
-}
+    }
 
 #ifndef __APPLE__
 int li_sigqueue(pid_t p, int sig, int word) {
